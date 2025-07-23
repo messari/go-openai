@@ -119,6 +119,15 @@ type ChatCompletionMessage struct {
 
 	// For Role=tool prompts this should be set to the ID given in the assistant's prior request to call a tool.
 	ToolCallID string `json:"tool_call_id,omitempty"`
+
+	// To support Anthropic's thinking blocks, we need to add a new field to the ChatCompletionMessage struct.
+	ThinkingBlocks []ThinkingBlock `json:"thinking_blocks,omitempty"`
+}
+
+type ThinkingBlock struct {
+	Type      string `json:"type"`
+	Thinking  string `json:"thinking"`
+	Signature string `json:"signature"`
 }
 
 func (m ChatCompletionMessage) MarshalJSON() ([]byte, error) {
@@ -136,6 +145,7 @@ func (m ChatCompletionMessage) MarshalJSON() ([]byte, error) {
 			FunctionCall     *FunctionCall     `json:"function_call,omitempty"`
 			ToolCalls        []ToolCall        `json:"tool_calls,omitempty"`
 			ToolCallID       string            `json:"tool_call_id,omitempty"`
+			ThinkingBlocks   []ThinkingBlock   `json:"thinking_blocks,omitempty"`
 		}(m)
 		return json.Marshal(msg)
 	}
@@ -150,6 +160,7 @@ func (m ChatCompletionMessage) MarshalJSON() ([]byte, error) {
 		FunctionCall     *FunctionCall     `json:"function_call,omitempty"`
 		ToolCalls        []ToolCall        `json:"tool_calls,omitempty"`
 		ToolCallID       string            `json:"tool_call_id,omitempty"`
+		ThinkingBlocks   []ThinkingBlock   `json:"thinking_blocks,omitempty"`
 	}(m)
 	return json.Marshal(msg)
 }
@@ -160,11 +171,12 @@ func (m *ChatCompletionMessage) UnmarshalJSON(bs []byte) error {
 		Content          string `json:"content"`
 		Refusal          string `json:"refusal,omitempty"`
 		MultiContent     []ChatMessagePart
-		Name             string        `json:"name,omitempty"`
-		ReasoningContent string        `json:"reasoning_content,omitempty"`
-		FunctionCall     *FunctionCall `json:"function_call,omitempty"`
-		ToolCalls        []ToolCall    `json:"tool_calls,omitempty"`
-		ToolCallID       string        `json:"tool_call_id,omitempty"`
+		Name             string          `json:"name,omitempty"`
+		ReasoningContent string          `json:"reasoning_content,omitempty"`
+		FunctionCall     *FunctionCall   `json:"function_call,omitempty"`
+		ToolCalls        []ToolCall      `json:"tool_calls,omitempty"`
+		ToolCallID       string          `json:"tool_call_id,omitempty"`
+		ThinkingBlocks   []ThinkingBlock `json:"thinking_blocks,omitempty"`
 	}{}
 
 	if err := json.Unmarshal(bs, &msg); err == nil {
@@ -181,6 +193,7 @@ func (m *ChatCompletionMessage) UnmarshalJSON(bs []byte) error {
 		FunctionCall     *FunctionCall     `json:"function_call,omitempty"`
 		ToolCalls        []ToolCall        `json:"tool_calls,omitempty"`
 		ToolCallID       string            `json:"tool_call_id,omitempty"`
+		ThinkingBlocks   []ThinkingBlock   `json:"thinking_blocks,omitempty"`
 	}{}
 	if err := json.Unmarshal(bs, &multiMsg); err != nil {
 		return err
