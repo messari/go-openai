@@ -352,8 +352,10 @@ const (
 )
 
 type Tool struct {
-	Type     ToolType            `json:"type"`
-	Function *FunctionDefinition `json:"function,omitempty"`
+	Type          ToolType            `json:"type"`
+	Function      *FunctionDefinition `json:"function,omitempty"`
+	Name          string              `json:"name,omitempty"`
+	MaxCharacters int                 `json:"max_characters,omitempty"`
 }
 
 type ToolChoice struct {
