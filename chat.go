@@ -270,6 +270,8 @@ type ChatCompletionRequestExtensions struct {
 	// ensuring predictable and consistent outputs in scenarios where specific
 	// choices are required.
 	GuidedChoice []string `json:"guided_choice,omitempty"`
+	BetaFeatures []string `json:"beta_features,omitempty"`
+	NoLog        bool     `json:"no-log,omitempty"`
 }
 
 // ChatCompletionRequest represents a request structure for chat completion API.
