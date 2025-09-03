@@ -269,9 +269,14 @@ type ChatCompletionRequestExtensions struct {
 	// is used to constrain the model's responses to a controlled set of options,
 	// ensuring predictable and consistent outputs in scenarios where specific
 	// choices are required.
-	GuidedChoice []string `json:"guided_choice,omitempty"`
+	GuidedChoice []string   `json:"guided_choice,omitempty"`
+	NoLog        bool       `json:"no-log,omitempty"`
+	Anthropic    *Anthropic `json:"-"`
+}
+
+// Anthropic is for Anthropic specific parameter fields made through the OpenAI API
+type Anthropic struct {
 	BetaFeatures []string `json:"beta_features,omitempty"`
-	NoLog        bool     `json:"no-log,omitempty"`
 }
 
 // ChatCompletionRequest represents a request structure for chat completion API.
