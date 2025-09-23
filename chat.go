@@ -119,6 +119,9 @@ type ChatCompletionMessage struct {
 
 	// For Role=tool prompts this should be set to the ID given in the assistant's prior request to call a tool.
 	ToolCallID string `json:"tool_call_id,omitempty"`
+
+	// Messari custom fields
+	Prefix bool `json:"prefix"`
 }
 
 func (m ChatCompletionMessage) MarshalJSON() ([]byte, error) {
