@@ -26,7 +26,7 @@ type Message struct {
 	httpHeader
 
 	// Messari custom fields
-	Prefix bool `json:"prefix"`
+	Prefix bool `json:"prefix,omitempty"`
 }
 
 type MessagesList struct {
