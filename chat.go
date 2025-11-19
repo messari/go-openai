@@ -360,6 +360,7 @@ const (
 type Tool struct {
 	Type     ToolType            `json:"type"`
 	Function *FunctionDefinition `json:"function,omitempty"`
+	Name     string              `json:"name,omitempty"`
 }
 
 type ToolChoice struct {
