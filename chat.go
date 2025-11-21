@@ -138,6 +138,7 @@ func (m ChatCompletionMessage) MarshalJSON() ([]byte, error) {
 			MultiContent     []ChatMessagePart `json:"content,omitempty"`
 			Name             string            `json:"name,omitempty"`
 			ReasoningContent string            `json:"reasoning_content,omitempty"`
+			ThinkingBlocks   []ThinkingBlock   `json:"thinking_blocks,omitempty"`
 			FunctionCall     *FunctionCall     `json:"function_call,omitempty"`
 			ToolCalls        []ToolCall        `json:"tool_calls,omitempty"`
 			ToolCallID       string            `json:"tool_call_id,omitempty"`
@@ -153,6 +154,7 @@ func (m ChatCompletionMessage) MarshalJSON() ([]byte, error) {
 		MultiContent     []ChatMessagePart `json:"-"`
 		Name             string            `json:"name,omitempty"`
 		ReasoningContent string            `json:"reasoning_content,omitempty"`
+		ThinkingBlocks   []ThinkingBlock   `json:"thinking_blocks,omitempty"`
 		FunctionCall     *FunctionCall     `json:"function_call,omitempty"`
 		ToolCalls        []ToolCall        `json:"tool_calls,omitempty"`
 		ToolCallID       string            `json:"tool_call_id,omitempty"`
@@ -167,12 +169,13 @@ func (m *ChatCompletionMessage) UnmarshalJSON(bs []byte) error {
 		Content          string `json:"content"`
 		Refusal          string `json:"refusal,omitempty"`
 		MultiContent     []ChatMessagePart
-		Name             string        `json:"name,omitempty"`
-		ReasoningContent string        `json:"reasoning_content,omitempty"`
-		FunctionCall     *FunctionCall `json:"function_call,omitempty"`
-		ToolCalls        []ToolCall    `json:"tool_calls,omitempty"`
-		ToolCallID       string        `json:"tool_call_id,omitempty"`
-		Prefix           bool          `json:"prefix,omitempty"`
+		Name             string          `json:"name,omitempty"`
+		ReasoningContent string          `json:"reasoning_content,omitempty"`
+		ThinkingBlocks   []ThinkingBlock `json:"thinking_blocks,omitempty"`
+		FunctionCall     *FunctionCall   `json:"function_call,omitempty"`
+		ToolCalls        []ToolCall      `json:"tool_calls,omitempty"`
+		ToolCallID       string          `json:"tool_call_id,omitempty"`
+		Prefix           bool            `json:"prefix,omitempty"`
 	}{}
 
 	if err := json.Unmarshal(bs, &msg); err == nil {
@@ -186,6 +189,7 @@ func (m *ChatCompletionMessage) UnmarshalJSON(bs []byte) error {
 		MultiContent     []ChatMessagePart `json:"content"`
 		Name             string            `json:"name,omitempty"`
 		ReasoningContent string            `json:"reasoning_content,omitempty"`
+		ThinkingBlocks   []ThinkingBlock   `json:"thinking_blocks,omitempty"`
 		FunctionCall     *FunctionCall     `json:"function_call,omitempty"`
 		ToolCalls        []ToolCall        `json:"tool_calls,omitempty"`
 		ToolCallID       string            `json:"tool_call_id,omitempty"`
