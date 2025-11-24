@@ -17,6 +17,18 @@ type ChatCompletionStreamChoiceDelta struct {
 	// the doc from deepseek:
 	// - https://api-docs.deepseek.com/api/create-chat-completion#responses
 	ReasoningContent string `json:"reasoning_content,omitempty"`
+
+	ProviderSpecificFields ProviderSpecificFields `json:"provider_specific_fields,omitempty"`
+}
+
+type ProviderSpecificFields struct {
+	ThinkingBlocks []ThinkingBlock `json:"thinking_blocks,omitempty"`
+}
+
+type ThinkingBlock struct {
+	Type      string `json:"type,omitempty"`
+	Signature string `json:"signature,omitempty"`
+	Thinking  string `json:"thinking,omitempty"`
 }
 
 type ChatCompletionStreamChoiceLogprobs struct {
