@@ -325,6 +325,8 @@ type ChatCompletionRequest struct {
 	ReasoningEffort string `json:"reasoning_effort,omitempty"`
 	// Metadata to store with the completion.
 	Metadata map[string]string `json:"metadata,omitempty"`
+	// NoLog is a specific field for LiteLLM to disable logging.
+	NoLog bool `json:"no-log,omitempty"`
 	// Configuration for a predicted output.
 	Prediction *Prediction `json:"prediction,omitempty"`
 	// ChatTemplateKwargs provides a way to add non-standard parameters to the request body.
