@@ -323,11 +323,13 @@ type ChatCompletionRequest struct {
 	Store bool `json:"store,omitempty"`
 	// Controls effort on reasoning for reasoning models. It can be set to "low", "medium", or "high".
 	ReasoningEffort string `json:"reasoning_effort,omitempty"`
-	// Metadata to store with the completion. Uses map[string]any (aligning with
-	// the other request types in this fork) so list-valued keys like "tags" can
-	// be sent. LiteLLM expects metadata["tags"] to be a list and calls .copy() on
-	// it; a string value crashes its SpendLog payload creation.
-	Metadata map[string]any `json:"metadata,omitempty"`
+	// Metadata to store with the completion.
+	Metadata map[string]string `json:"metadata,omitempty"`
+	// Tags is a LiteLLM-specific field for request tags (spend-log request_tags /
+	// tag-based routing). It is sent as a JSON array; do NOT put tags in
+	// metadata["tags"] as a string — LiteLLM's _get_request_tags calls .copy() on
+	// it and crashes its SpendLog payload creation, dropping the request from logs.
+	Tags []string `json:"tags,omitempty"`
 	// NoLog is a specific field for LiteLLM to disable logging.
 	NoLog bool `json:"no-log,omitempty"`
 	// Configuration for a predicted output.
