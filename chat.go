@@ -88,10 +88,23 @@ const (
 	ChatMessagePartTypeImageURL ChatMessagePartType = "image_url"
 )
 
+// CacheControl is an Anthropic-style cache-control breakpoint. When set on a
+// ChatMessagePart, LiteLLM uses it to drive provider prompt/context caching
+// (e.g. Anthropic ephemeral caching, Gemini cachedContents). Type is typically
+// "ephemeral"; TTL is optional (e.g. "1h").
+//
+// Messari custom type.
+type CacheControl struct {
+	Type string `json:"type"`
+	TTL  string `json:"ttl,omitempty"`
+}
+
 type ChatMessagePart struct {
 	Type     ChatMessagePartType  `json:"type,omitempty"`
 	Text     string               `json:"text,omitempty"`
 	ImageURL *ChatMessageImageURL `json:"image_url,omitempty"`
+	// CacheControl marks this part as a caching breakpoint for LiteLLM. Messari custom field.
+	CacheControl *CacheControl `json:"cache_control,omitempty"`
 }
 
 type ChatCompletionMessage struct {
